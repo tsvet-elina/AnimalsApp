@@ -3,8 +3,8 @@ package com.example.animalsapp;
 import android.media.Image;
 
 public class Animal {
-    String name;
-    int img;
+    private String name;
+    private int img;
 
     public Animal(String name, int img) {
         this.name = name;

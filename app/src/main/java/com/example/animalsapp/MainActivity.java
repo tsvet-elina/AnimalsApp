@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements AnimalAdapter.MyClickInterface{
     RecyclerView recyclerView;
     ArrayList<Animal> animals;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,11 @@ public class MainActivity extends AppCompatActivity implements AnimalAdapter.MyC
 
     @Override
     public void onItemClick(int positionOfTheAnimal) {
-        Toast.makeText(this, (CharSequence) animals.get(positionOfTheAnimal).getName(),Toast.LENGTH_SHORT).show();
+        String animalName = animals.get(positionOfTheAnimal).getName();
+        int animalImage = animals.get(positionOfTheAnimal).getImg();
+        intent = new Intent(MainActivity.this, ShowInfo.class);
+        intent.putExtra("animalName", animalName);
+        intent.putExtra("animalImg", animalImage);
+        startActivity(intent);
     }
 }
