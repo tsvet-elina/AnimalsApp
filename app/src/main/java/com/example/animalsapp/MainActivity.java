@@ -5,10 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AnimalAdapter.MyClickInterface{
     RecyclerView recyclerView;
     ArrayList<Animal> animals;
 
@@ -31,8 +32,13 @@ public class MainActivity extends AppCompatActivity {
         animals.add(new Animal("Pug",R.drawable.pug));
         animals.add(new Animal("Zebra",R.drawable.zebra));
 
-        AnimalAdapter animalAdapter = new AnimalAdapter(animals, this);
+        AnimalAdapter animalAdapter = new AnimalAdapter(animals, this, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(animalAdapter);
+    }
+
+    @Override
+    public void onItemClick(int positionOfTheAnimal) {
+        Toast.makeText(this, (CharSequence) animals.get(positionOfTheAnimal).getName(),Toast.LENGTH_SHORT).show();
     }
 }

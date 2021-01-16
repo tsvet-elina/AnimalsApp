@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalRowHolder> {
     ArrayList<Animal> animalData;
     Context context;
+    MyClickInterface onClickListener;
 
-    public AnimalAdapter(ArrayList<Animal> animalData, Context context) {
+    public AnimalAdapter(ArrayList<Animal> animalData, Context context, MyClickInterface onClickListener) {
         this.animalData = animalData;
         this.context = context;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -55,6 +57,16 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalRowH
 
             animalName = itemView.findViewById(R.id.txt_animal_name);
             animalImg = itemView.findViewById(R.id.img_animal);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.onItemClick(getAdapterPosition());
+                }
+            });
         }
+    }
+
+    interface MyClickInterface {
+        void onItemClick(int positionOfTheAnimal);
     }
 }
