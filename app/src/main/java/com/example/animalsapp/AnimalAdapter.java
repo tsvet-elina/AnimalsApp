@@ -35,12 +35,15 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalRowH
     // THis method show real information from arguments in AnimalRowHolder class
     @Override
     public void onBindViewHolder(@NonNull AnimalRowHolder holder, int position) {
-//        holder.animalName.setText();
+        // position is id of the row. Array starts from 0, 1, 2 etc.
+        holder.animalName.setText(animalData.get(position).getName());
+        holder.animalImg.setImageResource(animalData.get(position).getImg());
     }
 
+    // Size of data.
     @Override
     public int getItemCount() {
-        return 0;
+        return animalData.size();
     }
 
     class AnimalRowHolder extends RecyclerView.ViewHolder {
